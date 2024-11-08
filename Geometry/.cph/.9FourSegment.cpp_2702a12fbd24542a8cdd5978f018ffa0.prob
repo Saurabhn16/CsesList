@@ -1,0 +1,1 @@
+{"name":"Local: 9FourSegment","url":"d:\\tocopy\\practice\\code cp\\Csesllist\\Geometry\\9FourSegment.cpp","tests":[{"id":1730996417191,"input":"8 4\n3 2 4 5 1 1 5 3\n2 4\n5 6\n1 8\n3 3\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\tocopy\\practice\\code cp\\Csesllist\\Geometry\\9FourSegment.cpp","group":"local","local":true}
