@@ -56,26 +56,26 @@ int solve(int i, int j, const string &s, int n, vector<int> &lpst)
         return dp[i][j] = 26 * (solve(i + 1, j, s, n, lpst) % MOD);
     }
     int ct = 0;
-int t;
+    int t;
     for (char ch = 'A'; ch <= 'Z'; ch++)
     {
         t = j;
-        while(true)
+        while (true)
         {
-            if(ch == s[t])
+            if (ch == s[t])
             {
                 t++;
                 break;
             }
-            else if(t)
+            else if (t)
             {
-                t = lpst[t-1];
+                t = lpst[t - 1];
             }
-            else break;
+            else
+                break;
         }
-        ct += solve(i+1,t,s,n,lpst);
+        ct += solve(i + 1, t, s, n, lpst);
         ct %= MOD;
-
     }
 
     return dp[i][j] = ct; // Memoize the result

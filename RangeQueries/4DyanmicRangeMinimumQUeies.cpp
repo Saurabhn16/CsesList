@@ -7,13 +7,13 @@ using namespace std;
     cout.tie(0);
 
 const int N = 2e5 + 1;
-const int INF = 0;
+const int INF = 1e18;
 int v[N];
 int st[4 * N];
 
 int solve(int a, int b)
 {
-    return a^b;
+    return min(a , b);
 }
 int build(int si, int ss, int se)
 {
@@ -48,7 +48,7 @@ void update(int si, int ss, int se,int idx,int val)
 int getMin(int si, int ss, int se, int l, int r)
 {
     if (l > se || r < ss)
-        return INF;
+        return inf;
     if (ss >= l && se <= r)
         return st[si];
     int mid = (ss + se) >> 1;
@@ -70,12 +70,12 @@ signed main()
     for (int i = 0; i < q; i++)
     {
         int c, a, b;
-        cin >> a >> b;
-        // if (c == 1)
-        // {
-        //     update(1,1,n,a, b);
-        // }
-        // else
+        cin >> c >> a >> b;
+        if (c == 1)
+        {
+            update(1,1,n,a, b);
+        }
+        else
         {
             cout << getMin(1, 1, n, a, b) << endl;
         }

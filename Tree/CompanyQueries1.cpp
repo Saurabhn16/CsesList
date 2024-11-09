@@ -22,13 +22,13 @@ void dfs(int v, int p) {
     }
 }
 
-int query(int node, int k) {
+int solve(int node, int k) {
     if (k == 0) return node;
     if (node == -1) return -1;
     
     for (int i = 20; i >= 0; i--) {
         if (k & (1 << i)) {
-            return query(anc[node][i], k - (1 << i));
+            return solve(anc[node][i], k - (1 << i));
         }
     }
     return node;
@@ -50,7 +50,8 @@ signed main() {
     for (int i = 0; i < q; i++) {
         int x, k;
         cin >> x >> k;
-        cout << query(x, k) << endl;
+        cout << solve(x, k) << endl;
     }
     return 0;
 }
+
