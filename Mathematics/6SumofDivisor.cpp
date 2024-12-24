@@ -1,52 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define int long long
-#define fast ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define md 1000000007
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
 
-const int MOD = 1e9+7;
 
-// Function to calculate modular inverse using extended Euclidean method
-int inverse(int i) {
-    if (i == 1) return 1;
-    return (MOD - ((MOD / i) * inverse(MOD % i)) % MOD + MOD) % MOD;
-}
-
-// Function to calculate a^b % MOD using fast exponentiation
-int POW(int a, int b) {
-    if (b == 0) return 1;
-    if (b == 1) return a % MOD;
-    int temp = POW(a, b / 2);
-    if (b % 2 == 0) return (temp * temp) % MOD;
-    else return (((temp * temp) % MOD) * a) % MOD;
+int exp(int x, int y, int p) {
+    int res = 1;
+    x = x % p;
+    while (y > 0) {
+        if (y & 1)
+            res = (res * x) % p;
+        y = y >> 1;
+        x = (x * x) % p;
+    }
+    return res;
 }
 
 signed main() {
     fast;
     int n;
     cin >> n;
-    int ct = 0;
-    
-    for (int i = 1, j; i <= n; i = j) {
-        int q = n / i;
-        j = n / q + 1;
-        
-        // Calculate a = (j - 1) * j / 2 % MOD using modular inverse of 2
-        int a = (j - 1) * j % MOD;
-        a = a * inverse(2) % MOD;
-        
-        // Calculate b = (i - 1) * i / 2 % MOD using modular inverse of 2
-        int b = (i - 1) * i % MOD;
-        b = b * inverse(2) % MOD;
-        
-        // Calculate qt = (a - b + MOD) % MOD
-        int qt = (a - b + MOD) % MOD;
-        
-        // Update the count
-        ct = (ct + q * qt) % MOD;
+
+    int ans = 0;
+    int sq = sqrt(n);
+    int inv2 = exp(2, md - 2, md);
+    for (int i = 1; i <= sq; i++) {
+        int l = n / (i + 1) + 1; 
+        int r = n / i;         
+        int x = (r - l + 1) % md;
+
+      
+        ans = (ans + x * ((l + r) % md) % md * inv2 % md * i % md) % md;
     }
-    
-    // Final division by 2 using modular inverse of 2
-    cout << (ct * inverse(2)) % MOD << endl;
+
+   
+    for (int i = 1; i <= n / (sq + 1); i++) {
+        ans = (ans + (n / i) * i % md) % md;
+    }
+
+    cout << ans << "\n";
     return 0;
 }

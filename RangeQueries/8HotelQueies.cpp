@@ -37,7 +37,7 @@ void update(int si, int ss, int se, int idx, int val) {
 
 int ind(int l, int r, int si, int m) {
     if (st[si] < m) {
-        return 0; // No valid index found
+        return 0; 
     }
     if (l == r) {
         return l;
